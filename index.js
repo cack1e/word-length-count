@@ -1,6 +1,6 @@
 
-const toReplace = ["7","[","A","Q","?","P","O","N","L","G","T","J","C","F","Y","t"];
-const replaceWith = ["V7","I7","H7","S7","R7","R7","Q7","P7","O7","L7","N7","M7","J7","K7","U7","T7"];
+const toReplace = ["7","C","A","Q","P","O","N","L","G","T","J","D","F","Y","t"];
+const replaceWith = ["V7","I7","H7","S7","R7","Q7","P7","O7","L7","N7","M7","J7","K7","U7","T7"];
 
 document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("frm1").addEventListener("submit", function(e) {
