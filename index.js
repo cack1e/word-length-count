@@ -1,11 +1,15 @@
 
 const shorthandCharas = ["7","C","A","Q","P","O","N","L","G","T","J","D","F","Y","t"];
 const sheetCells = ["V7","I7","H7","S7","R7","Q7","P7","O7","L7","N7","M7","J7","K7","U7","T7"];
+const squeak = new Audio("media/speak.mp3");
 
 document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("frm1").addEventListener("submit", function(e) {
-        e.preventDefault() // Cancel the default action
+        e.preventDefault(); // Cancel the default action
         processSubmit();
+    });
+    document.getElementById("octo").addEventListener("click", function(e) {
+        playSqueak();
     });
 });
 
@@ -82,4 +86,9 @@ function copyText(){ //shoutout w3 schools https://www.w3schools.com/howto/howto
     textToCopy.setSelectionRange(0, 99999);
     navigator.clipboard.writeText(textToCopy.value);
     copyButton.value="Copied!";
+}
+
+function playSqueak(){
+    squeak.currentTime=0;
+    squeak.play();
 }
