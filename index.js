@@ -40,6 +40,9 @@ function replaceOther(transcript){
             result=result+curr;
         }
         else{ //my letter isnt shorthand!!
+            if(curr=="_"){
+                curr="□";
+            }
             group=group+curr;
             if(x==transcript.length-1){
                 if(result.length>0){
