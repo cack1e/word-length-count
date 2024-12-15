@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 function processSubmit(){
     let userTranscript = document.getElementsByName('userInput')[0].value;
     let output = convertToSlotter(userTranscript);
+    let copyButton = document.getElementById("copyButton");
+    copyButton.value="Copy text";
     document.getElementById('result-p').innerHTML=output;
     document.getElementById('result').style.visibility='visible';
 }
@@ -73,4 +75,13 @@ function convertToSlotter(transcript){
     }
     result="=("+result+")";
     return(result);
+}
+
+function copyText(){ //shoutout w3 schools https://www.w3schools.com/howto/howto_js_copy_clipboard.asp
+    let textToCopy = document.getElementById("result-p");
+    let copyButton = document.getElementById("copyButton");
+    textToCopy.select();
+    textToCopy.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(textToCopy.value);
+    copyButton.value="Copied!";
 }
