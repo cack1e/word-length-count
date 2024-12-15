@@ -1,3 +1,9 @@
 #result{
     visibility: hidden;
+    width:100%;
+}
+#result-p{
+    width: 100%;
+    max-width: 400px;
+    height: 180px;
 }
