@@ -28,7 +28,7 @@ function replaceOther(transcript){
     let group="";
     for(let x=0; x<transcript.length;x++){
         let curr = transcript[x];
-        isCurrShorthand = isThisShorthand(curr);
+        isCurrShorthand = toReplace.includes(curr);
         if(isCurrShorthand){ //my letter is shorthand!!
             if(result.length>0){
                 result = result+"&";
@@ -88,13 +88,4 @@ function cleanUpSlotter(transcript){
     //surround with '=(' ')'
     transcript = "=(" + transcript + ")";
     return transcript;
-}
-
-function isThisShorthand(letter){
-    if(toReplace.includes(letter)){
-        return true;
-    }
-    else{
-        return false;
-    }
 }
