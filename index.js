@@ -55,7 +55,7 @@ function convertToSlotter(transcript){
                 n++; //have to add an extra 1 to n so it skips the "n" of \n after looking at the "\"
             }
             else{ //we add it to the group thats in quotes
-                if(curr="_"){
+                if(curr=="_"){
                     curr="□"; //if we put an underscore in the shorthand text, that means we probably can't read the actual letter. to stop it being confused with un-slotteed shorthand, we're gonna make it this square symbol :]
                 }
                 group=group+curr;
