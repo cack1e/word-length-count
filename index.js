@@ -24,12 +24,12 @@ function convertToSlotter(transcript){
     for(let n=0; n<transcript.length;n++){
         let curr = transcript[n];
         if(shorthandCharas.includes(curr)){ //if current letter is shorthand
-            if(group.length>0){
-                result= result+"\""+group+"\"";
-                group="";
-            }
             if(result.length>0){
                 result = result+"&";
+            }
+            if(group.length>0){
+                result= result+"\""+group+"\"&";
+                group="";
             }
             result=result+sheetCells[shorthandCharas.indexOf(curr)];
         }
@@ -43,7 +43,6 @@ function convertToSlotter(transcript){
                     result = result+"&";
                 }
                 result = result+"CHAR(10)";
-                n++; //have to add an extra 1 to n so it skips the "n" of \n after looking at the "\
             }
             else if(curr.charCodeAt()==13){ //return char code
                 if(group.length>0){
@@ -54,7 +53,6 @@ function convertToSlotter(transcript){
                     result = result+"&";
                 }
                 result = result+"CHAR(13)";
-                n++; //have to add an extra 1 to n so it skips the "n" of \n after looking at the "\"
             }
             else{ //we add it to the group thats in quotes
                 if(curr=="_"){
