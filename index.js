@@ -39,24 +39,28 @@ function convertToSlotter(transcript){
         }
         else{
             if(curr.charCodeAt()==10){ //new line char code
-                if(group.length>0){
-                    result= result+"\""+group+"\"";
-                    group="";
+                if(n<transcript.length-1){ //bandaid fix to get rid of ending char10 when i paste a cell
+                    if(group.length>0){
+                        result= result+"\""+group+"\"";
+                        group="";
+                    }
+                    if(result.length>0){
+                        result = result+"&";
+                    }
+                    result = result+"CHAR(10)";
                 }
-                if(result.length>0){
-                    result = result+"&";
-                }
-                result = result+"CHAR(10)";
             }
             else if(curr.charCodeAt()==13){ //return char code
-                if(group.length>0){
-                    result= result+"\""+group+"\"";
-                    group="";
+                if(n<transcript.length-1){ //copy of bandaid fix from line 42 bc what the hell we probably dont need an ending char13 if that shows up either
+                    if(group.length>0){
+                        result= result+"\""+group+"\"";
+                        group="";
+                    }
+                    if(result.length>0){
+                        result = result+"&";
+                    }
+                    result = result+"CHAR(13)";
                 }
-                if(result.length>0){
-                    result = result+"&";
-                }
-                result = result+"CHAR(13)";
             }
             else{ //we add it to the group thats in quotes
                 if(curr=="_"){
