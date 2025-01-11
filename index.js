@@ -1,6 +1,6 @@
 
 const shorthandCharas = ["7","C","A","Q","P","O","N","L","G","T","J","D","F","Y","t"];
-const sheetCells = ["W7","J7","I7","T7","S7","R7","Q7","P7","M7","O7","N7","K7","L7","V7","U7"];
+const sheetCells = ["X7","K7","J7","U7","T7","S7","R7","Q7","N7","P7","O7","L7","M7","W7","V7"];
 const squeak = new Audio("media/speak.mp3");
 
 document.addEventListener('DOMContentLoaded', (event) => {
