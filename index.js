@@ -1,6 +1,3 @@
-
-const shorthandCharas = ["7","C","A","Q","P","O","N","L","G","T","J","D","F","Y","t"];
-const sheetCells = ["X7","K7","J7","U7","T7","S7","R7","Q7","N7","P7","O7","L7","M7","W7","V7"];
 const squeak = new Audio("media/speak.mp3");
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -15,71 +12,38 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 function processSubmit(){
     let userTranscript = document.getElementsByName('userInput')[0].value;
-    let output = convertToSlotter(userTranscript);
+    let output = convertToWordLength(userTranscript);
     let copyButton = document.getElementById("copyButton");
     copyButton.value="Copy text";
     document.getElementById('result-p').innerHTML=output;
     document.getElementById('result').style.visibility='visible';
 }
 
-function convertToSlotter(transcript){
+function convertToWordLength(transcript){
     let result="";
     let group="";
     for(let n=0; n<transcript.length;n++){
         let curr = transcript[n];
-        if(shorthandCharas.includes(curr)){ //if current letter is shorthand
-            if(result.length>0){
-                result = result+"&";
-            }
-            if(group.length>0){
-                result= result+"\""+group+"\"&";
-                group="";
-            }
-            result=result+sheetCells[shorthandCharas.indexOf(curr)];
+        if((curr.charCodeAt()!=10)&&(curr!=" ")){ //if its not a linebreak or space
+            group+=curr;
         }
         else{
-            if(curr.charCodeAt()==10){ //new line char code
-                if(n<transcript.length-1){ //bandaid fix to get rid of ending char10 when i paste a cell
-                    if(group.length>0){
-                        result= result+"\""+group+"\"";
-                        group="";
-                    }
-                    if(result.length>0){
-                        result = result+"&";
-                    }
-                    result = result+"CHAR(10)";
+            if(group.length>0){
+                if(result.length>0){
+                    result+=" ";
                 }
-            }
-            else if(curr.charCodeAt()==13){ //return char code
-                if(n<transcript.length-1){ //copy of bandaid fix from line 42 bc what the hell we probably dont need an ending char13 if that shows up either
-                    if(group.length>0){
-                        result= result+"\""+group+"\"";
-                        group="";
-                    }
-                    if(result.length>0){
-                        result = result+"&";
-                    }
-                    result = result+"CHAR(13)";
-                }
-            }
-            else{ //we add it to the group thats in quotes
-                if(curr=="_"){
-                    curr="□"; //if we put an underscore in the shorthand text, that means we probably can't read the actual letter. to stop it being confused with un-slotteed shorthand, we're gonna make it this square symbol :]
-                }
-                group=group+curr;
-                if(n==transcript.length-1){
-                    if(result.length>0){
-                        result = result+"&";
-                    }
-                    if(group.length>0){
-                        result= result+"\""+group+"\"";
-                        group="";
-                    }
-                }
+                result+=group.length;
+                group="";
             }
         }
+        if(n==transcript.length-1){
+            if(result.length>0){
+                result+=" ";
+            }
+            result+=group.length;
+            group="";
+        }
     }
-    result="=("+result+")";
     return(result);
 }
 
