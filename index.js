@@ -51,10 +51,14 @@ function convertToWordLength(transcript) {
 function cleanInput(uncleanText) {
     let lastCharacter = uncleanText[uncleanText.length - 1];
     let cleanedText = uncleanText;
-    while (lastCharacter.charCodeAt() == 10) {
+    while (lastCharacter.charCodeAt() == 10) { //if last character is a linebreak then delete it
         cleanedText = cleanedText.slice(0, -1);
         lastCharacter = cleanedText[cleanedText.length - 1];
     }
+    let firstCharacter = cleanedText[0];
+	if ((firstCharacter.charCodeAt() == 34) && (lastCharacter.charCodeAt() == 34)){ //if first last character and last characters are quotes get rid of them
+        cleanedText = cleanedText.substr(1, cleanedText.length - 2);
+	}
     return cleanedText;
 }
 
